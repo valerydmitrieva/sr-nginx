@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nginx:
+    build: .
+    network_mode: "host"
+    #  restart: "always"
+    volumes:
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    env_file:
+    - ".env"
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
