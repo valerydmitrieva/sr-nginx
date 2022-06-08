@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(nc.secretsrattan.ru)
+domains=(BASE_DOMAIN)
 rsa_key_size=4096
 data_path="./config/certbot"
 email="dmit.valerya@yandex.ru" # Adding a valid address is strongly recommended
@@ -38,7 +38,7 @@ docker-compose run --rm --entrypoint "\
 echo
 
 echo "### Give access to privkey"
-sudo chmod 644 config/certbot/conf/live/nc.secretsrattan.ru/privkey.pem
+sudo chmod 644 config/certbot/conf/live/BASE_DOMAIN/privkey.pem
 echo
 
 echo "### Starting nginx ..."

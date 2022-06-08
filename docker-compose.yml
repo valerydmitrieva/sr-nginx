@@ -8,10 +8,13 @@ services:
     volumes:
       - ./config/certbot/conf:/etc/letsencrypt
       - ./config/certbot/www:/var/www/certbot
-    env_file:
-    - ".env"
+    environment:
+    - BASE_DOMAIN=${BASE_DOMAIN}
+    - TYPE=frontend
   certbot:
     image: certbot/certbot
+    environment:
+      - TYPE=certbot
     volumes:
       - ./config/certbot/conf:/etc/letsencrypt
       - ./config/certbot/www:/var/www/certbot
