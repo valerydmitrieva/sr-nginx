@@ -5,7 +5,14 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(BASE_DOMAIN)
+
+set -x
+
+export $(cat .env | xargs)
+
+set +x
+
+domains=($BASE_DOMAIN)
 rsa_key_size=4096
 data_path="./config/certbot"
 email="dmit.valerya@yandex.ru" # Adding a valid address is strongly recommended
